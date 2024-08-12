@@ -19,7 +19,7 @@ public class OsDto implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataFechamento;
 	private Integer prioridade;
-	@NotEmpty(message = "o campo observacoes e obrigatorio!")
+	@NotEmpty(message = "field Observations is required!")
 	private String observacoes;
 	private Integer status;
 	private Integer tecnico;

@@ -35,7 +35,7 @@ public class ClienteService {
 			Optional<Cliente> obj = clienteRepository.findById(id);
 
 			return obj.orElseThrow(() -> new objectNotFoundException(
-					"Cliente Nao Encontrado ! id: " + id + " ,Tipo:  " + Cliente.class.getName()));
+					"Custummer not found ! id: " + id + " ,type:  " + Cliente.class.getName()));
 		}
 
 		public List<Cliente> findAll() {
@@ -46,7 +46,7 @@ public class ClienteService {
 		public Cliente create(Cliente objDto) {
 			if (findByCpf(objDto) != null) {
 
-				throw new DataIntegratyViolationException("CPF ja cadastrado na Base de dados");
+				throw new DataIntegratyViolationException("ID number already saved in the data base");
 
 			}
 			Cliente newObj = new Cliente(null, objDto.getNome(), objDto.getCpf(), objDto.getTelefone());
@@ -62,7 +62,7 @@ public class ClienteService {
 
 			if (findByCpf(objDto) != null && findByCpf(objDto).getId() != id) {
 
-				throw new DataIntegratyViolationException("CPF ja cadastrado na Base de dados");
+				throw new DataIntegratyViolationException("Fields must not be null");
 
 			}
 

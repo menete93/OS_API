@@ -12,13 +12,13 @@ public class ClienteDto implements Serializable {
 
 	private Integer id;
 
-	@NotEmpty(message = " O campo Nome e requerido")
+	@NotEmpty(message = " field Name is required")
 	private String nome;
 
-	@NotEmpty(message = " O campo CPF e requerido")
+	@NotEmpty(message = " field cpf is required")
 	private String cpf;
 
-	@NotEmpty(message = " O campo Telefone e requerido")
+	@NotEmpty(message = " field cellphone is required")
 	private String telefone;
 
 	public ClienteDto() {

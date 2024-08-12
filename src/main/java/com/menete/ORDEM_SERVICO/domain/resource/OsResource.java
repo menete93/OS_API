@@ -20,6 +20,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.menete.ORDEM_SERVICO.domain.dto.OsDto;
 import com.menete.ORDEM_SERVICO.domain.service.OsService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 @CrossOrigin("*")
 @RestController
@@ -29,6 +32,9 @@ public class OsResource {
 	@Autowired
 	OsService osService;
 
+	@Operation(description = "get order service manager by id")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return OS by id"),
+	@ApiResponse(responseCode = "400", description = "Object not found!"), })
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<OsDto> findById(@PathVariable Integer id) {
 
@@ -38,6 +44,9 @@ public class OsResource {
 
 	}
 
+	@Operation(description = "get order service manager by id")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return All OS"),
+	@ApiResponse(responseCode = "400", description = "Ids must not be null"), })
 	@GetMapping
 	public ResponseEntity<List<OsDto>> findAll() {
 
@@ -47,6 +56,10 @@ public class OsResource {
 
 	}
 
+	@Operation(description = "Create Order Service Manager")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Create Order Service Manager"),
+	@ApiResponse(responseCode = "200", description = "created"),
+	@ApiResponse(responseCode = "400", description = "Ids must not be null"),})
 	@PostMapping
 	public ResponseEntity<OsDto> create(@Valid @RequestBody OsDto obj) {
 
@@ -57,6 +70,10 @@ public class OsResource {
 
 	}
 
+	@Operation(description = "update Order Service Manager")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+	@ApiResponse(responseCode = "200", description = "updated"),
+	@ApiResponse(responseCode = "400", description = "Fields must not be null"),})
 	 @PutMapping
 	 public ResponseEntity<OsDto> update(@Valid @RequestBody OsDto dto) {
 		 

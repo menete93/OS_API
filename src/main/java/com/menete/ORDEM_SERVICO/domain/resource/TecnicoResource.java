@@ -21,6 +21,9 @@ import com.menete.ORDEM_SERVICO.domain.Tecnico;
 import com.menete.ORDEM_SERVICO.domain.dto.TecnicoDto;
 import com.menete.ORDEM_SERVICO.domain.service.TecnicoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 
 @CrossOrigin("*")
@@ -31,6 +34,10 @@ public class TecnicoResource {
 	@Autowired
 	TecnicoService tecnicoService;
 
+	
+	@Operation(description = "get Technician by id")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return Technician"),
+	@ApiResponse(responseCode = "400", description = "Technician not found ! id"), })
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDto> finById(@PathVariable Integer id) {
 		Tecnico obj = tecnicoService.findById(id);
@@ -40,6 +47,10 @@ public class TecnicoResource {
 
 	}
 
+	@Operation(description = "get All Technicians")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return All Technicians"),
+	@ApiResponse(responseCode = "200", description = "return All Technicians"),
+	@ApiResponse(responseCode = "400", description = "not found"),})
 	@GetMapping
 	public ResponseEntity<List<TecnicoDto>> findAll() {
 
@@ -61,6 +72,10 @@ public class TecnicoResource {
 //           list.forEach(obj -> listDto.add(new TecnicoDto(obj)));
 	}
 
+	@Operation(description = "Create Technician")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return all Technician"),
+	@ApiResponse(responseCode = "200", description = "created"),
+	@ApiResponse(responseCode = "400", description = "ID's number already saved in the data base"),})
 	@PostMapping
 	public ResponseEntity<TecnicoDto> create(@Valid @RequestBody TecnicoDto objDto) {
 		Tecnico obj = tecnicoService.create(objDto);
@@ -71,6 +86,10 @@ public class TecnicoResource {
 
 	}
 
+	@Operation(description = "update Technician")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+	@ApiResponse(responseCode = "200", description = "updated"),
+	@ApiResponse(responseCode = "400", description = "Fields must not be null"),})
 	@PutMapping(value = "/{id}")
 	public void upDate(@PathVariable Integer id, @Valid @RequestBody TecnicoDto objDto) {
 
@@ -79,6 +98,10 @@ public class TecnicoResource {
 		// return newObj;
 	}
 
+	@Operation(description = "delete Technician")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+	@ApiResponse(responseCode = "200", description = "deleted"),
+	@ApiResponse(responseCode = "400", description = "OK"),})
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 

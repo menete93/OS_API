@@ -33,7 +33,7 @@ public class OsService {
 
 		Optional<Os> obj = osRepository.findById(id);
 		return obj.orElseThrow(() -> new objectNotFoundException(
-				"Objecto nao encontrado! id  " + id + ", Tipo " + Os.class.getName()));
+				"Object not found! id  " + id + ", Type " + Os.class.getName()));
 
 	}
 

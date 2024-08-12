@@ -22,6 +22,9 @@ import com.menete.ORDEM_SERVICO.domain.dto.ClienteDto;
 import com.menete.ORDEM_SERVICO.domain.dto.TecnicoDto;
 import com.menete.ORDEM_SERVICO.domain.service.ClienteService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 
 @CrossOrigin("*")
@@ -32,6 +35,9 @@ public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
 
+	@Operation(description = "get custummers by id")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return Custummer"),
+	@ApiResponse(responseCode = "400", description = "Custummer not found ! id"), })
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ClienteDto> finById(@PathVariable Integer id) {
 		Cliente obj = clienteService.findById(id);
@@ -41,6 +47,10 @@ public class ClienteController {
 
 	}
 
+	@Operation(description = "get All Custumers")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return all custumers"),
+	@ApiResponse(responseCode = "200", description = "return all custumers"),
+	@ApiResponse(responseCode = "400", description = "not found"),})
 	@GetMapping
 	public ResponseEntity<List<ClienteDto>> findAll() {
 
@@ -62,6 +72,10 @@ public class ClienteController {
 //           list.forEach(obj -> listDto.add(new TecnicoDto(obj)));
 	}
 
+	@Operation(description = "Create Custumer")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return all custumers"),
+	@ApiResponse(responseCode = "200", description = "created"),
+	@ApiResponse(responseCode = "400", description = "Ids must not be null"),})
 	@PostMapping
 	public ResponseEntity<Cliente> create(@Valid @RequestBody Cliente objDto) {
 		Cliente obj = clienteService.create(objDto);
@@ -72,6 +86,10 @@ public class ClienteController {
 
 	}
 
+	@Operation(description = "update Custumer")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+	@ApiResponse(responseCode = "200", description = "updated"),
+	@ApiResponse(responseCode = "400", description = "Fields must not be null"),})
 	@PutMapping(value = "/{id}")
 	public void upDate(@PathVariable Integer id, @Valid @RequestBody Cliente objDto) {
 
@@ -79,7 +97,10 @@ public class ClienteController {
 
 		// return newObj;
 	}
-
+	@Operation(description = "delete Custumer")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+	@ApiResponse(responseCode = "200", description = "delete"),
+	@ApiResponse(responseCode = "400", description = "ok"),})
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 
