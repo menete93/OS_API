@@ -1,15 +1,16 @@
-package com.menete.ORDEM_SERVICO.domain;
+package com.menete.ORDEM_SERVICO.domain.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public abstract class Pessoa  implements Serializable {
+public abstract class Person  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,20 +19,21 @@ public abstract class Pessoa  implements Serializable {
 	private Integer id;
 		
 
-	private String nome;
+	private String name;
 	private String cpf;
-	private String telefone;
+	@Column(name = "cell_phone")
+	private String cellPhone;
 
-	public Pessoa() {
+	public Person() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pessoa(Integer id, String nome, String cpf, String telefone) {
+	public Person(Integer id, String name, String cpf, String cellPhone) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
 		this.cpf = cpf;
-		this.telefone = telefone;
+		this.cellPhone = cellPhone;
 	}
 
 	public Integer getId() {
@@ -42,12 +44,12 @@ public abstract class Pessoa  implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getCpf() {
@@ -58,12 +60,12 @@ public abstract class Pessoa  implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getCellPhone() {
+		return cellPhone;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
 	}
 
 	@Override
@@ -79,7 +81,7 @@ public abstract class Pessoa  implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pessoa other = (Pessoa) obj;
+		Person other = (Person) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id);
 	}
 

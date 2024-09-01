@@ -1,19 +1,20 @@
 package com.menete.ORDEM_SERVICO.domain.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.menete.ORDEM_SERVICO.domain.Cliente;
-import com.menete.ORDEM_SERVICO.domain.Os;
-import com.menete.ORDEM_SERVICO.domain.Prioridade;
-import com.menete.ORDEM_SERVICO.domain.Status;
-import com.menete.ORDEM_SERVICO.domain.Tecnico;
 import com.menete.ORDEM_SERVICO.domain.dto.OsDto;
+import com.menete.ORDEM_SERVICO.domain.entity.Custommer;
+import com.menete.ORDEM_SERVICO.domain.entity.Os;
+import com.menete.ORDEM_SERVICO.domain.entity.Technician;
+import com.menete.ORDEM_SERVICO.domain.enums.Priority;
+import com.menete.ORDEM_SERVICO.domain.enums.Status;
 import com.menete.ORDEM_SERVICO.domain.exceptions.objectNotFoundException;
-import com.menete.ORDEM_SERVICO.domain.repository.domain.repository.OSRepository;
+import com.menete.ORDEM_SERVICO.domain.repository.OSRepository;
 
 import jakarta.validation.Valid;
 
@@ -24,10 +25,10 @@ public class OsService {
 	private OSRepository osRepository;
 
 	@Autowired
-	TecnicoService service;
+	TecnicianService service;
 
 	@Autowired
-	ClienteService clienteService;
+	CustomerService clienteService;
 
 	public Os findById(Integer id) {
 
@@ -52,52 +53,41 @@ public class OsService {
 
 		Os newOs = new Os();
 		//newOs.setId(obj.getId());
-		newOs.setObservacoes(obj.getObservacoes());
-		newOs.setPrioridade(Prioridade.toEnum(obj.getPrioridade().getCod()));
+		newOs.setObservations(obj.getObservations());
+		newOs.setPrioridade(Priority.toEnum(obj.getPriority().getCod()));
 		newOs.setStatus(Status.toEnum(obj.getStatus().getCod()));
 //		`
 
-		Tecnico tecnico = service.findById(obj.getTecnico());
+		Technician tecnician = service.findById(obj.getTechnician());
 
-		Cliente cliente = clienteService.findById(obj.getCliente());
+		Custommer customer = clienteService.findById(obj.getCustomer());
 
-		newOs.setTecnico(tecnico);
-		newOs.setCliente(cliente);
+		newOs.setTechnician(tecnician);
+		newOs.setCustomer(customer);
 
 		return osRepository.save(newOs);
 	}
 
 	public Os update(@Valid OsDto obj) {
 
-		
-		
-		
-		
-		
-//		Tecnico tecnico = service.findById(dto.getTecnico());
-//		tecnico.setCpf(null);
-//		Cliente cliente = clienteService.findById(dto.getCliente());
-//		
-//		
-//		Os newOs = new Os();
-		//return fromDto(dto);
-		
-		
-
 		Os newOs = findById(obj.getId());
 		//newOs.setId(obj.getId());
-		newOs.setObservacoes(obj.getObservacoes());
-		newOs.setPrioridade(Prioridade.toEnum(obj.getPrioridade().getCod()));
+		newOs.setObservations(obj.getObservations());
+		newOs.setPrioridade(Priority.toEnum(obj.getPriority().getCod()));
 		newOs.setStatus(Status.toEnum(obj.getStatus().getCod()));
-//		`
+	
 
-		Tecnico tecnico = service.findById(obj.getTecnico());
+		Technician tecnician = service.findById(obj.getTechnician());
 
-		Cliente cliente = clienteService.findById(obj.getCliente());
+		Custommer customer = clienteService.findById(obj.getCustomer());
 
-		newOs.setTecnico(tecnico);
-		newOs.setCliente(cliente);
-
+		newOs.setTechnician(tecnician);
+		newOs.setCustomer(customer);
+	if(obj.getStatus().getCod().equals(2)) {
+			
+		newOs.setCloseDate(LocalDateTime.now());
+			
+		}
 		return osRepository.save(newOs);
 	}
 }

@@ -21,7 +21,7 @@ import com.menete.ORDEM_SERVICO.auth.entity.Role;
 import com.menete.ORDEM_SERVICO.auth.repository.UserRepository;
 @CrossOrigin(origins = "https://localhost:4200", allowCredentials = "true")
 @RestController
-public class TokenController {
+public class TokenResource {
 
 	
 	private final JwtEncoder jwtEncoder;
@@ -31,7 +31,7 @@ public class TokenController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public TokenController(JwtEncoder jwtEncoder, UserRepository userRepository 
+	public TokenResource(JwtEncoder jwtEncoder, UserRepository userRepository 
 			,BCryptPasswordEncoder bCryptPasswordEncoder) {
 	
 		this.jwtEncoder = jwtEncoder;

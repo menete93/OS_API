@@ -1,13 +1,13 @@
-package com.menete.ORDEM_SERVICO.domain;
+package com.menete.ORDEM_SERVICO.domain.enums;
 
-public enum Prioridade {
+public enum Priority {
 
-	BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
+	LOW(0, "LOW"), MEDIUM(1, "MEDIUM"), HIGH(2, "HIGH");
 
 	private Integer cod;
 	private String descricao;
 
-	private Prioridade(Integer cod, String descricao) {
+	private Priority(Integer cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -28,20 +28,20 @@ public enum Prioridade {
 		this.descricao = descricao;
 	}
 
-	public static Prioridade toEnum(Integer cod) {
+	public static Priority toEnum(Integer cod) {
 
 		if (cod == null) {
 			return null;
 		}
 
-		for (Prioridade x : Prioridade.values()) {
+		for (Priority x : Priority.values()) {
 
 			if (cod.equals(x.getCod())) {
 				return x;
 			}
 		}
 
-		throw new IllegalArgumentException("Prioridade Invalida! " + cod);
+		throw new IllegalArgumentException("invalid priority! " + cod);
 	}
 
 }

@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.menete.ORDEM_SERVICO.domain.Cliente;
+import com.menete.ORDEM_SERVICO.domain.entity.Custommer;
 
 public class ExcelUploadService {
 
@@ -22,9 +22,9 @@ public class ExcelUploadService {
 		return Objects.equals(file.getContentType(), ".xlsx");
 	}
 
-	public static List<Cliente> getCustomerDateFromExcel(InputStream inputStream) {
+	public static List<Custommer> getCustomerDateFromExcel(InputStream inputStream) {
 
-		List<Cliente> custumer = new ArrayList<>();
+		List<Custommer> custumer = new ArrayList<>();
 
 		try {
 			XSSFWorkbook worKbOOK = new XSSFWorkbook(inputStream);
@@ -42,7 +42,7 @@ public class ExcelUploadService {
 
 				Iterator<Cell> cellIterator = row.iterator();
 				int cellIndex = 0;
-				Cliente customer = new Cliente();
+				Custommer customer = new Custommer();
 				while (cellIterator.hasNext()) {
 					Cell cell = cellIterator.next();
 

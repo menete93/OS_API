@@ -1,8 +1,8 @@
-package com.menete.ORDEM_SERVICO.domain;
+package com.menete.ORDEM_SERVICO.domain.enums;
 
 public enum Status {
 
-	ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), ENCERRADO(2, "ENCERRADO");
+	OPEN(0, "OPEN"), PROCESSING(1, "PROCESSING"), CLOSED(2, "CLOSED");
 
 	private Integer cod;
 	private String descricao;
@@ -41,7 +41,7 @@ public enum Status {
 			}
 		}
 
-		throw new IllegalArgumentException("Status Invalida!" + integer);
+		throw new IllegalArgumentException("Invalid Status!" + integer);
 	}
 
 

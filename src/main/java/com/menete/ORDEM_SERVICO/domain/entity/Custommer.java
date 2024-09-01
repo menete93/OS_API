@@ -1,4 +1,4 @@
-package com.menete.ORDEM_SERVICO.domain;
+package com.menete.ORDEM_SERVICO.domain.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,22 +8,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Cliente extends Pessoa implements Serializable{
+public class Custommer extends Person implements Serializable{
 	
 	private static final long serialVersionUID = 1l;
 	
 	
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "customer")
 	private List<Os> list = new ArrayList<>();
 	
 
-	public Cliente() {
+	public Custommer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cliente(Integer id, String nome, String cpf, String telefone) {
-		super(id, nome, cpf, telefone);
+	public Custommer(Integer id, String name, String cpf, String cellPhone) {
+		super(id, name, cpf, cellPhone);
 		// TODO Auto-generated constructor stub
 	}
 

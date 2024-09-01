@@ -79,5 +79,7 @@ public class AdminUserConfig implements CommandLineRunner {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 }

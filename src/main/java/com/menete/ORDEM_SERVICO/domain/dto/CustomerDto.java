@@ -2,36 +2,36 @@ package com.menete.ORDEM_SERVICO.domain.dto;
 
 import java.io.Serializable;
 
-import com.menete.ORDEM_SERVICO.domain.Tecnico;
+import com.menete.ORDEM_SERVICO.domain.entity.Custommer;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class TecnicoDto implements Serializable {
+public class CustomerDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 
 	@NotEmpty(message = " field Name is required")
-	private String nome;
+	private String name;
 
 	@NotEmpty(message = " field cpf is required")
 	private String cpf;
 
 	@NotEmpty(message = " field cellphone is required")
-	private String telefone;
+	private String cellPhone;
 
-	public TecnicoDto() {
+	public CustomerDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public TecnicoDto(Tecnico obj) {
+	public CustomerDto(Custommer obj) {
 		super();
 		this.id = obj.getId();
-		this.nome = obj.getNome();
+		this.name = obj.getName();
 		this.cpf = obj.getCpf();
-		this.telefone = obj.getTelefone();
+		this.cellPhone = obj.getCellPhone();
 	}
 
 	public Integer getId() {
@@ -42,12 +42,12 @@ public class TecnicoDto implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String name) {
+		this.name = name;
 	}
 
 	public String getCpf() {
@@ -58,12 +58,12 @@ public class TecnicoDto implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getCellPhone() {
+		return cellPhone;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
 	}
 
 }

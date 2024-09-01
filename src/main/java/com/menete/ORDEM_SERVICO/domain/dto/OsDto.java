@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.menete.ORDEM_SERVICO.domain.Os;
-import com.menete.ORDEM_SERVICO.domain.Prioridade;
-import com.menete.ORDEM_SERVICO.domain.Status;
+import com.menete.ORDEM_SERVICO.domain.entity.Os;
+import com.menete.ORDEM_SERVICO.domain.enums.Priority;
+import com.menete.ORDEM_SERVICO.domain.enums.Status;
 
 import jakarta.validation.constraints.NotEmpty;
 
@@ -15,15 +15,15 @@ public class OsDto implements Serializable {
 
 	private Integer id;
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private LocalDateTime dataAbertura;
+	private LocalDateTime openData;
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private LocalDateTime dataFechamento;
-	private Integer prioridade;
+	private LocalDateTime closeDate;
+	private Integer priority;
 	@NotEmpty(message = "field Observations is required!")
-	private String observacoes;
+	private String observations;
 	private Integer status;
-	private Integer tecnico;
-	private Integer cliente;
+	private Integer technician;
+	private Integer customer;
 
 	public OsDto() {
 		super();
@@ -33,13 +33,13 @@ public class OsDto implements Serializable {
 	public OsDto(Os obj) {
 		super();
 		this.id = obj.getId();
-		this.dataAbertura = obj.getDataAbertura();
-		this.dataFechamento = obj.getDataFechamento();
-		this.prioridade = obj.getPrioridade().getCod();
-		this.observacoes = obj.getObservacoes();
+		this.openData = obj.getOpenDate();
+		this.closeDate = obj.getCloseDate();
+		this.priority = obj.getPrioridade().getCod();
+		this.observations = obj.getObservatios();
 		this.status = obj.getStatus().getCod();
-		this.tecnico = obj.getTecnico().getId();
-		this.cliente = obj.getCliente().getId();
+		this.technician = obj.getTechnitian().getId();
+		this.customer = obj.getCustomer().getId();
 	}
 
 	public Integer getId() {
@@ -50,37 +50,37 @@ public class OsDto implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDateTime getDataAbertura() {
-		return dataAbertura;
+	public LocalDateTime getOpenDate() {
+		return openData;
 	}
 
-	public void setDataAbertura(LocalDateTime dataAbertura) {
-		this.dataAbertura = dataAbertura;
+	public void setOpenDate(LocalDateTime openDate) {
+		this.openData = openDate;
 	}
 
-	public LocalDateTime getDataFechamento() {
-		return dataFechamento;
+	public LocalDateTime getCloseDate() {
+		return closeDate;
 	}
 
-	public void setDataFechamento(LocalDateTime dataFechamento) {
-		this.dataFechamento = dataFechamento;
+	public void setCloseDate(LocalDateTime closeDate) {
+		this.closeDate = closeDate;
 	}
 
-	public Prioridade getPrioridade() {
-		return Prioridade.toEnum(this.prioridade);
+	public Priority getPriority() {
+		return Priority.toEnum(this.priority);
 	}
 
 	
-    public void setPrioridade(Integer prioridade) {
-        this.prioridade = Prioridade.toEnum(prioridade).getCod();
+    public void setPriority(Integer priority) {
+        this.priority = Priority.toEnum(priority).getCod();
     }
 
-	public String getObservacoes() {
-		return observacoes;
+	public String getObservations() {
+		return observations;
 	}
 
-	public void setObservacoes(String observacoes) {
-		this.observacoes = observacoes;
+	public void setObservations(String observations) {
+		this.observations = observations;
 	}
 
 	public Status getStatus() {
@@ -91,20 +91,20 @@ public class OsDto implements Serializable {
 		this.status = status;
 	}
 
-	public Integer getTecnico() {
-		return tecnico;
+	public Integer getTechnician() {
+		return technician;
 	}
 
-	public void setTecnico(Integer tecnico) {
-		this.tecnico = tecnico;
+	public void setTechnician(Integer technician) {
+		this.technician = technician;
 	}
 
-	public Integer getCliente() {
-		return cliente;
+	public Integer getCustomer() {
+		return customer;
 	}
 
-	public void setCliente(Integer cliente) {
-		this.cliente = cliente;
+	public void setCustomer(Integer customer) {
+		this.customer = customer;
 	}
 
 }

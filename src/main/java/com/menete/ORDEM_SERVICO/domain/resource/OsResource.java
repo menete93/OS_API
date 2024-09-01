@@ -35,7 +35,7 @@ public class OsResource {
 	@Operation(description = "get order service manager by id")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return OS by id"),
 	@ApiResponse(responseCode = "400", description = "Object not found!"), })
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "find-by/{id}")
 	public ResponseEntity<OsDto> findById(@PathVariable Integer id) {
 
 		OsDto objDto = new OsDto(osService.findById(id));
@@ -47,7 +47,7 @@ public class OsResource {
 	@Operation(description = "get order service manager by id")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return All OS"),
 	@ApiResponse(responseCode = "400", description = "Ids must not be null"), })
-	@GetMapping
+	@GetMapping(value = "find-all")
 	public ResponseEntity<List<OsDto>> findAll() {
 
 		// Conversao em DTO
@@ -60,7 +60,7 @@ public class OsResource {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Create Order Service Manager"),
 	@ApiResponse(responseCode = "200", description = "created"),
 	@ApiResponse(responseCode = "400", description = "Ids must not be null"),})
-	@PostMapping
+	@PostMapping(value = "create")
 	public ResponseEntity<OsDto> create(@Valid @RequestBody OsDto obj) {
 
 		 obj = new OsDto(osService.create(obj));
@@ -74,7 +74,7 @@ public class OsResource {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
 	@ApiResponse(responseCode = "200", description = "updated"),
 	@ApiResponse(responseCode = "400", description = "Fields must not be null"),})
-	 @PutMapping
+	 @PutMapping(value = "update/{id}")
 	 public ResponseEntity<OsDto> update(@Valid @RequestBody OsDto dto) {
 		 
 		 OsDto obj = new OsDto(osService.update(dto));

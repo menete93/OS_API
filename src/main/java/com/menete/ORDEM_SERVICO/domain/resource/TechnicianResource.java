@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.menete.ORDEM_SERVICO.domain.Tecnico;
-import com.menete.ORDEM_SERVICO.domain.dto.TecnicoDto;
-import com.menete.ORDEM_SERVICO.domain.service.TecnicoService;
+import com.menete.ORDEM_SERVICO.domain.dto.TechnicianDto;
+import com.menete.ORDEM_SERVICO.domain.entity.Technician;
+import com.menete.ORDEM_SERVICO.domain.service.TecnicianService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,20 +28,19 @@ import jakarta.validation.Valid;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping(value = "/tecnicos")
-public class TecnicoResource {
+@RequestMapping(value = "/technician")
+public class TechnicianResource {
 
 	@Autowired
-	TecnicoService tecnicoService;
+	TecnicianService tecnicoService;
 
-	
 	@Operation(description = "get Technician by id")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return Technician"),
-	@ApiResponse(responseCode = "400", description = "Technician not found ! id"), })
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<TecnicoDto> finById(@PathVariable Integer id) {
-		Tecnico obj = tecnicoService.findById(id);
-		TecnicoDto objDto = new TecnicoDto(obj);
+			@ApiResponse(responseCode = "400", description = "Technician not found ! id"), })
+	@GetMapping(value = "find-by/{id}")
+	public ResponseEntity<TechnicianDto> finById(@PathVariable Integer id) {
+		Technician obj = tecnicoService.findById(id);
+		TechnicianDto objDto = new TechnicianDto(obj);
 
 		return ResponseEntity.ok().body(objDto);
 
@@ -49,36 +48,25 @@ public class TecnicoResource {
 
 	@Operation(description = "get All Technicians")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return All Technicians"),
-	@ApiResponse(responseCode = "200", description = "return All Technicians"),
-	@ApiResponse(responseCode = "400", description = "not found"),})
-	@GetMapping
-	public ResponseEntity<List<TecnicoDto>> findAll() {
+			@ApiResponse(responseCode = "200", description = "return All Technicians"),
+			@ApiResponse(responseCode = "400", description = "not found"), })
+	@GetMapping(value = "find-all")
+	public ResponseEntity<List<TechnicianDto>> findAll() {
 
 		// 1- Ou apenas executar este mapeamento com apenas uma linha
-		List<TecnicoDto> listDto = tecnicoService.findAll().stream().map(obj -> new TecnicoDto(obj))
+		List<TechnicianDto> listDto = tecnicoService.findAll().stream().map(obj -> new TechnicianDto(obj))
 				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 
-		// 2- podemos escrever desta forma
-
-//		List<Tecnico> list = tecnicoService.findAll();
-//		List<TecnicoDto> listDto = new ArrayList<>();
-//		
-		// 3- ou enta com apenas uma linha
-//		for (Tecnico obj : list) {
-//			listDto.add(new TecnicoDto(obj));
-//		}
-
-//           list.forEach(obj -> listDto.add(new TecnicoDto(obj)));
 	}
 
 	@Operation(description = "Create Technician")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return all Technician"),
-	@ApiResponse(responseCode = "200", description = "created"),
-	@ApiResponse(responseCode = "400", description = "ID's number already saved in the data base"),})
-	@PostMapping
-	public ResponseEntity<TecnicoDto> create(@Valid @RequestBody TecnicoDto objDto) {
-		Tecnico obj = tecnicoService.create(objDto);
+			@ApiResponse(responseCode = "200", description = "created"),
+			@ApiResponse(responseCode = "400", description = "ID's number already saved in the data base"), })
+	@PostMapping(value = "create")
+	public ResponseEntity<TechnicianDto> create(@Valid @RequestBody TechnicianDto objDto) {
+		Technician obj = tecnicoService.create(objDto);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
@@ -88,21 +76,21 @@ public class TecnicoResource {
 
 	@Operation(description = "update Technician")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
-	@ApiResponse(responseCode = "200", description = "updated"),
-	@ApiResponse(responseCode = "400", description = "Fields must not be null"),})
-	@PutMapping(value = "/{id}")
-	public void upDate(@PathVariable Integer id, @Valid @RequestBody TecnicoDto objDto) {
+			@ApiResponse(responseCode = "200", description = "updated"),
+			@ApiResponse(responseCode = "400", description = "Fields must not be null"), })
+	@PutMapping(value = "update/{id}")
+	public void upDate(@PathVariable Integer id, @Valid @RequestBody TechnicianDto objDto) {
 
-		TecnicoDto newObj = new TecnicoDto(tecnicoService.update(id, objDto));
+		TechnicianDto newObj = new TechnicianDto(tecnicoService.update(id, objDto));
 
 		// return newObj;
 	}
 
 	@Operation(description = "delete Technician")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
-	@ApiResponse(responseCode = "200", description = "deleted"),
-	@ApiResponse(responseCode = "400", description = "OK"),})
-	@DeleteMapping(value = "/{id}")
+			@ApiResponse(responseCode = "200", description = "deleted"),
+			@ApiResponse(responseCode = "400", description = "OK"), })
+	@DeleteMapping(value = "delete/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 
 		tecnicoService.delete(id);

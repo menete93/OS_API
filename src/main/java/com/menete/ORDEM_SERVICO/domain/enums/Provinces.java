@@ -1,4 +1,4 @@
-package com.menete.ORDEM_SERVICO.domain;
+package com.menete.ORDEM_SERVICO.domain.enums;
 
 public enum Provinces {
 
@@ -44,7 +44,7 @@ public enum Provinces {
 			}
 		}
 
-		throw new IllegalArgumentException("Status Invalida!" + integer);
+		throw new IllegalArgumentException("Invalid province!" + integer);
 	}
 
 

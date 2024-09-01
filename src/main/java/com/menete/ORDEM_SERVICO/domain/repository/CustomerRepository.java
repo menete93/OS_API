@@ -5,15 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.menete.ORDEM_SERVICO.domain.Tecnico;
+import com.menete.ORDEM_SERVICO.domain.entity.Custommer;
 
 @Repository
-public interface TecnicoRepository extends JpaRepository<Tecnico, Integer> {
+public interface CustomerRepository extends JpaRepository<Custommer, Integer> {
 
-	@Query("SELECT obj FROM Tecnico obj  WHERE obj.cpf =:cpf")
-	Tecnico findByCpf(@Param("cpf") String cpf);
-
-	
-	
-	
+	@Query("SELECT i FROM Custommer i  WHERE i.cpf =:cpf")
+	Custommer findByCpf(@Param("cpf") String cpf);
 }

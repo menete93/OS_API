@@ -1,6 +1,10 @@
-package com.menete.ORDEM_SERVICO.domain;
+package com.menete.ORDEM_SERVICO.domain.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
+
+import com.menete.ORDEM_SERVICO.domain.enums.Provinces;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,25 +13,29 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="SERVICES")
-public class Services {
+public class Services implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
-	private String service_name;
-	private String province;
-	private String location_description;
+	private String serviceName;
+	private Provinces province;
+	private String locationDescription;
 	public Services() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Services(String id, String service_name, String province, String location_description) {
+	public Services(String id, String serviceName, Provinces province, String locationDescription) {
 		super();
 		this.id = id;
-		this.service_name = service_name;
+		this.serviceName = serviceName;
 		this.province = province;
-		this.location_description = location_description;
+		this.locationDescription = locationDescription;
 	}
 	public String getId() {
 		return id;
@@ -35,23 +43,23 @@ public class Services {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getService_name() {
-		return service_name;
+	public String getServiceName() {
+		return serviceName;
 	}
-	public void setService_name(String service_name) {
-		this.service_name = service_name;
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
-	public String getProvince() {
+	public Provinces getProvince() {
 		return province;
 	}
-	public void setProvince(String province) {
+	public void setProvince(Provinces province) {
 		this.province = province;
 	}
-	public String getLocation_description() {
-		return location_description;
+	public String getLocationDescription() {
+		return locationDescription;
 	}
-	public void setLocation_description(String location_description) {
-		this.location_description = location_description;
+	public void setLocationDescription(String locationDescription) {
+		this.locationDescription = locationDescription;
 	}
 	@Override
 	public int hashCode() {
