@@ -29,33 +29,6 @@ public class AdminUserConfig implements CommandLineRunner {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-//	@Override
-//	@Transactional
-//	public void run(String... args) throws Exception {
-//		// TODO Auto-generated method stub
-//		  System.out.println("CommandLineRunner executado.");
-//		var roleAdmin = roleRepository.findByName(Role.Values.ADMIN.name());
-//		
-//		var userAdmin = userRepository.findByUsername("admin");
-//		
-//		userAdmin.ifPresentOrElse(
-//			    user -> System.out.println("User already exists: " + user.getUsername()),
-//			    () -> {
-//			        var user = new User();
-//			        user.setUsername("admin");
-//			        user.setPassword(passwordEncoder.encode("123"));
-//			        user.setRoles(Set.of(roleAdmin));
-//			        userRepository.save(user);
-//			    }
-//			);
-//
-//		
-//		
-//	}
-//
-//	
-//	
-
 	@Override
 	@Transactional
 	public void run(String... args) {
@@ -79,7 +52,5 @@ public class AdminUserConfig implements CommandLineRunner {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 }
