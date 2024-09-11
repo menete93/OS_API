@@ -35,12 +35,12 @@ public class AdminUserConfig implements CommandLineRunner {
 		try {
 			var roleAdmin = roleRepository.findByName(Role.Values.ADMIN.name());
 			if (roleAdmin == null) {
-				System.out.println("Role 'ADMIN' não encontrado.");
+				System.out.println("Role 'ADMIN' not found!.");
 				return;
 			}
 
 			var userAdmin = userRepository.findByUsername("admin");
-			userAdmin.ifPresentOrElse(user -> System.out.println("Usuário admin já existe: " + user.getUsername()),
+			userAdmin.ifPresentOrElse(user -> System.out.println("User admin already exist!: " + user.getUsername()),
 					() -> {
 						var user = new User();
 						user.setUsername("admin");

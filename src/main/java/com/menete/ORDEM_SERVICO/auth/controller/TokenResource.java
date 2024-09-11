@@ -51,7 +51,7 @@ public class TokenResource {
 		}
 		var now = Instant.now();
 		
-		var expiresIn = 300L;
+		var expiresIn = 600L;
 		
 		  var scopes = User.get().getRoles()
 	                .stream()

@@ -10,7 +10,7 @@ public class TechnicianDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	//private Integer id;
 
 	@NotEmpty(message = " field Name is required")
 	private String name;
@@ -28,19 +28,19 @@ public class TechnicianDto implements Serializable {
 
 	public TechnicianDto(Technician obj) {
 		super();
-		this.id = obj.getId();
+	//	this.id = obj.getId();
 		this.name = obj.getName();
 		this.cpf = obj.getCpf();
 		this.cellPhone = obj.getCellPhone();
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	public String getName() {
 		return name;

@@ -10,7 +10,7 @@ import com.menete.ORDEM_SERVICO.domain.enums.Status;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class OsDto implements Serializable {
+public class OsAllDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -25,12 +25,12 @@ public class OsDto implements Serializable {
 	private Integer technician;
 	private Integer customer;
 
-	public OsDto() {
+	public OsAllDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OsDto(Os obj) {
+	public OsAllDTO(Os obj) {
 		super();
 		this.id = obj.getId();
 		this.openDate = obj.getOpenDate();
@@ -43,7 +43,8 @@ public class OsDto implements Serializable {
 	}
 
 	public Integer getId() {
-		return id;	}
+		return id;
+	}
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -107,3 +108,4 @@ public class OsDto implements Serializable {
 	}
 
 }
+

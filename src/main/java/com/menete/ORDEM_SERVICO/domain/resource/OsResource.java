@@ -1,8 +1,8 @@
+
 package com.menete.ORDEM_SERVICO.domain.resource;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.menete.ORDEM_SERVICO.domain.dto.OsAllDTO;
+import com.menete.ORDEM_SERVICO.domain.dto.OsCreateDTO;
 import com.menete.ORDEM_SERVICO.domain.dto.OsDto;
 import com.menete.ORDEM_SERVICO.domain.service.OsService;
 
@@ -35,7 +37,7 @@ public class OsResource {
 	@Operation(description = "get order service manager by id")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return OS by id"),
 	@ApiResponse(responseCode = "400", description = "Object not found!"), })
-	@GetMapping(value = "find-by/{id}")
+	@GetMapping(value = "find-by-id/{id}")
 	public ResponseEntity<OsDto> findById(@PathVariable Integer id) {
 
 		OsDto objDto = new OsDto(osService.findById(id));
@@ -44,14 +46,14 @@ public class OsResource {
 
 	}
 
-	@Operation(description = "get order service manager by id")
+	@Operation(description = "get order service manager")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "return All OS"),
-	@ApiResponse(responseCode = "400", description = "Ids must not be null"), })
+	@ApiResponse(responseCode = "400", description = "Error request check the documentation"), })
 	@GetMapping(value = "find-all")
-	public ResponseEntity<List<OsDto>> findAll() {
+	public ResponseEntity<List<OsAllDTO>> findAll() {
 
 		// Conversao em DTO
-		List<OsDto> list = osService.findAll().stream().map(osObj -> new OsDto(osObj)).collect(Collectors.toList());
+		List<OsAllDTO> list = osService.findAll().stream().map(osObj -> new OsAllDTO(osObj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(list);
 
 	}
@@ -61,11 +63,11 @@ public class OsResource {
 	@ApiResponse(responseCode = "200", description = "created"),
 	@ApiResponse(responseCode = "400", description = "Ids must not be null"),})
 	@PostMapping(value = "create")
-	public ResponseEntity<OsDto> create(@Valid @RequestBody OsDto obj) {
+	public ResponseEntity<OsCreateDTO> create(@Valid @RequestBody OsCreateDTO obj) {
 
-		 obj = new OsDto(osService.create(obj));
-		// retorna o objecto criado
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		 obj = new OsCreateDTO(osService.create(obj));
+		// return the created obj
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj).toUri();
 		return ResponseEntity.created(uri).build();
 
 	}
@@ -75,9 +77,9 @@ public class OsResource {
 	@ApiResponse(responseCode = "200", description = "updated"),
 	@ApiResponse(responseCode = "400", description = "Fields must not be null"),})
 	 @PutMapping(value = "update/{id}")
-	 public ResponseEntity<OsDto> update(@Valid @RequestBody OsDto dto) {
+	 public ResponseEntity<OsCreateDTO> update(@PathVariable Integer id ,@Valid @RequestBody OsCreateDTO dto) {
 		 
-		 OsDto obj = new OsDto(osService.update(dto));
+		OsCreateDTO obj = new OsCreateDTO(osService.update(id,dto));
 		return ResponseEntity.ok().body(obj);
 	 }
 	

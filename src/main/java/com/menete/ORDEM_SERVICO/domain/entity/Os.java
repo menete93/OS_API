@@ -23,7 +23,7 @@ public class Os {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonFormat(pattern = "dd//MM/yyyy HH:mm")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Column(name = "open_date")
 	private LocalDateTime openDate;
 	
@@ -53,11 +53,11 @@ public class Os {
 	}
 
 	public Os(Integer id,
-			Priority priority, String observations, Status status, Technician technician,
+			Priority priority,LocalDateTime opDateTime, String observations, Status status, Technician technician,
 			Custommer customer) {
 		super();
 		this.id = id;
-		//this.setOpenDate(LocalDateTime.now());
+		this.setOpenDate(LocalDateTime.now());
 		this.priority = (priority == null) ? 0 : priority.getCod();
 		this.observations = observations;
 		this.status = (status == null) ? 0 : status.getCod();

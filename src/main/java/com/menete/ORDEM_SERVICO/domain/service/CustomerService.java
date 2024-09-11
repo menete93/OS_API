@@ -41,7 +41,7 @@ public class CustomerService {
 			return clienteRepository.findAll();
 		}
 
-		public Custommer create(Custommer objDto) {
+		public Custommer create(CustomerDto objDto) {
 			if (findByCpf(objDto) != null) {
 
 				throw new DataIntegratyViolationException("ID number already saved in the data base");
@@ -54,7 +54,7 @@ public class CustomerService {
 		}
 
 		// Metod que verifica se este CPF ja existe na base de dados
-		public Custommer update(Integer id, @Valid Custommer objDto) {
+		public Custommer update(Integer id, @Valid CustomerDto objDto) {
 
 			Custommer oldObj = findById(id);
 
@@ -71,7 +71,7 @@ public class CustomerService {
 			return clienteRepository.save(oldObj);
 		}
 
-		private Custommer findByCpf(Custommer objDto) {
+		private Custommer findByCpf(CustomerDto objDto) {
 
 			Custommer obj = clienteRepository.findByCpf(objDto.getCpf());
 
@@ -95,7 +95,6 @@ public class CustomerService {
 				throw new DataIntegratyViolationException("Customer Removed sucessfully !");
 
 			}
-			throw new DataIntegratyViolationException("Objecto not found !");
-
+					throw new DataIntegratyViolationException("Objecto not found !");
 		}
 	}

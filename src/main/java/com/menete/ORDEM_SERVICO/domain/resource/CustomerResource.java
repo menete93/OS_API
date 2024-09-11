@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.menete.ORDEM_SERVICO.domain.dto.CustomerAllDTO;
 import com.menete.ORDEM_SERVICO.domain.dto.CustomerDto;
 import com.menete.ORDEM_SERVICO.domain.entity.Custommer;
 import com.menete.ORDEM_SERVICO.domain.service.CustomerService;
@@ -52,10 +53,10 @@ public class CustomerResource {
 	@ApiResponse(responseCode = "200", description = "return all custumers"),
 	@ApiResponse(responseCode = "400", description = "not found"),})
 	@GetMapping(value = "/find-all")
-	public ResponseEntity<List<CustomerDto>> findAll() {
+	public ResponseEntity<List<CustomerAllDTO>> findAll() {
 
 		// 1- Ou apenas executar este mapeamento com apenas uma linha
-		List<CustomerDto> listDto = clienteService.findAll().stream().map(obj -> new CustomerDto(obj))
+		List<CustomerAllDTO> listDto = clienteService.findAll().stream().map(obj -> new CustomerAllDTO(obj))
 				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 
@@ -67,7 +68,7 @@ public class CustomerResource {
 	@ApiResponse(responseCode = "200", description = "created"),
 	@ApiResponse(responseCode = "400", description = "Ids must not be null"),})
 	@PostMapping(value = "/create")
-	public ResponseEntity<Custommer> create(@Valid @RequestBody Custommer objDto) {
+	public ResponseEntity<CustomerDto> create(@Valid @RequestBody CustomerDto objDto) {
 		Custommer obj = clienteService.create(objDto);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -81,11 +82,11 @@ public class CustomerResource {
 	@ApiResponse(responseCode = "200", description = "updated"),
 	@ApiResponse(responseCode = "400", description = "Fields must not be null"),})
 	@PutMapping(value = "update/{id}")
-	public void upDate(@PathVariable Integer id, @Valid @RequestBody Custommer objDto) {
+	public CustomerDto upDate(@PathVariable Integer id, @Valid @RequestBody CustomerDto objDto) {
 
 		CustomerDto newObj = new CustomerDto(clienteService.update(id, objDto));
 
-		// return newObj;
+		 return newObj;
 	}
 	@Operation(description = "delete Custumer")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),

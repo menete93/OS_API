@@ -6,11 +6,11 @@ import com.menete.ORDEM_SERVICO.domain.entity.Custommer;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class CustomerDto implements Serializable {
+public class CustomerAllDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	//private Integer id;
+	private Integer id;
 
 	@NotEmpty(message = " field Name is required")
 	private String name;
@@ -21,26 +21,26 @@ public class CustomerDto implements Serializable {
 	@NotEmpty(message = " field cellphone is required")
 	private String cellPhone;
 
-	public CustomerDto() {
+	public CustomerAllDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CustomerDto(Custommer obj) {
+	public CustomerAllDTO(Custommer obj) {
 		super();
-		//this.id = obj.getId();
+		this.id = obj.getId();
 		this.name = obj.getName();
 		this.cpf = obj.getCpf();
 		this.cellPhone = obj.getCellPhone();
 	}
 
-//	public Integer getId() {
-//		return id;
-//	}
-//
-//	public void setId(Integer id) {
-//		this.id = id;
-//	}
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

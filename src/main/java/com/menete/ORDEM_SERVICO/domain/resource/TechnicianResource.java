@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.menete.ORDEM_SERVICO.domain.dto.TechnicialAllDTO;
 import com.menete.ORDEM_SERVICO.domain.dto.TechnicianDto;
 import com.menete.ORDEM_SERVICO.domain.entity.Technician;
 import com.menete.ORDEM_SERVICO.domain.service.TecnicianService;
@@ -51,10 +52,10 @@ public class TechnicianResource {
 			@ApiResponse(responseCode = "200", description = "return All Technicians"),
 			@ApiResponse(responseCode = "400", description = "not found"), })
 	@GetMapping(value = "find-all")
-	public ResponseEntity<List<TechnicianDto>> findAll() {
+	public ResponseEntity<List<TechnicialAllDTO>> findAll() {
 
 		// 1- Ou apenas executar este mapeamento com apenas uma linha
-		List<TechnicianDto> listDto = tecnicoService.findAll().stream().map(obj -> new TechnicianDto(obj))
+		List<TechnicialAllDTO> listDto = tecnicoService.findAll().stream().map(obj -> new TechnicialAllDTO(obj))
 				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 

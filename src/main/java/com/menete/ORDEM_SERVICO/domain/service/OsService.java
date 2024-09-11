@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.menete.ORDEM_SERVICO.domain.dto.OsDto;
+import com.menete.ORDEM_SERVICO.domain.dto.OsCreateDTO;
 import com.menete.ORDEM_SERVICO.domain.entity.Custommer;
 import com.menete.ORDEM_SERVICO.domain.entity.Os;
 import com.menete.ORDEM_SERVICO.domain.entity.Technician;
@@ -43,12 +43,12 @@ public class OsService {
 		return osRepository.findAll();
 	}
 
-	public Os create(@Valid OsDto obj) {
+	public Os create(@Valid OsCreateDTO obj) {
 
 		return fromDto(obj);
 	}
 
-	private Os fromDto(OsDto obj) {
+	private Os fromDto(OsCreateDTO obj) {
 
 
 		Os newOs = new Os();
@@ -68,9 +68,9 @@ public class OsService {
 		return osRepository.save(newOs);
 	}
 
-	public Os update(@Valid OsDto obj) {
+	public Os update(@Valid Integer id ,OsCreateDTO obj) {
 
-		Os newOs = findById(obj.getId());
+		Os newOs = findById(id);
 		//newOs.setId(obj.getId());
 		newOs.setObservations(obj.getObservations());
 		newOs.setPrioridade(Priority.toEnum(obj.getPriority().getCod()));
