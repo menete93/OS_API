@@ -2,6 +2,7 @@ package com.menete.ORDEM_SERVICO.auth.controller;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -70,9 +70,9 @@ public class UserResource {
 	}
 
 	@PutMapping("/update-password/{id}")
-	public ResponseEntity<User> updatePassword(UpdateUser dto) {
+	public ResponseEntity<User> updatePassword(UUID id, UpdateUser dto) {
 
-		User user = userService.findById(dto.id());
+		User user = userService.findById(id);
 
 		if (!passwordEncoder.matches(dto.oldPassword(), user.getPassword())) {
 
